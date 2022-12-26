@@ -11,6 +11,8 @@ function App() {
   const [dotList, setDotList] = useState<Dot[]>([]);
   const [oldDotsList, setOldDotsList] = useState<Dot[]>([]);
 
+  const message: string = "Limit of";
+
   const handleAddDots = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -25,14 +27,15 @@ function App() {
   ) => {
     event.stopPropagation();
 
-    if(dotList.length === 0){
+    if (dotList.length === 0) {
+      alert(`${message} Undo!`);
       return;
     }
 
-    const removedDot: Dot = dotList[(dotList.length - 1)]
+    const removedDot: Dot = dotList[dotList.length - 1];
 
-    setDotList(dotList.slice(0, -1))
-    setOldDotsList([...oldDotsList, removedDot])
+    setDotList(dotList.slice(0, -1));
+    setOldDotsList([...oldDotsList, removedDot]);
   };
 
   const handleRecoverDots = (
@@ -40,14 +43,15 @@ function App() {
   ) => {
     event.stopPropagation();
 
-    if(oldDotsList.length === 0){
+    if (oldDotsList.length === 0) {
+      alert(`${message} ReDo!`);
       return;
     }
 
-    const recoveredDot: Dot = oldDotsList[(oldDotsList.length - 1)]
+    const recoveredDot: Dot = oldDotsList[oldDotsList.length - 1];
 
-    setDotList([...dotList, recoveredDot])
-    setOldDotsList(oldDotsList.slice(0, -1))
+    setDotList([...dotList, recoveredDot]);
+    setOldDotsList(oldDotsList.slice(0, -1));
   };
 
   return (
